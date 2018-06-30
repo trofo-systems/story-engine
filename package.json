@@ -1,0 +1,23 @@
+{
+  "name": "story-engine",
+  "version": "0.5.0",
+  "description": "An engine to support user decision driven stories using Alexa skills",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/trofo-systems/story-engine.git"
+  },
+  "keywords": [
+    "alexa",
+    "story"
+  ],
+  "author": "Andre Levandovski Rosot",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/trofo-systems/story-engine/issues"
+  },
+  "homepage": "https://github.com/trofo-systems/story-engine#readme"
+}

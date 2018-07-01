@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/trofo-systems/story-engine.svg?branch=master)](https://travis-ci.org/trofo-systems/story-engine)
+[![Known Vulnerabilities](https://snyk.io/test/github/trofo-systems/story-engine/badge.svg?targetFile=package.json)](https://snyk.io/test/github/trofo-systems/story-engine?targetFile=package.json)
+
 # story-engine
 An engine to support user decision driven stories using Alexa skills
 

@@ -1,0 +1,3 @@
+steps:
+  - label: npm test
+    command: "npm install && npm test"

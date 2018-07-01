@@ -27,9 +27,8 @@
   "devDependencies": {
     "async": "^2.6.1",
     "chai": "^3.4.1",
-    "express": "^4.14.0",
-    "mocha": "^2.3.4",
+    "mocha": "^5.2.0",
     "proxyquire": "^2.0.1",
-    "supertest": "^2.0.1"
+    "supertest": "^3.1.0"
   }
 }

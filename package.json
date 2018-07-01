@@ -1,6 +1,6 @@
 {
-  "name": "story-engine",
-  "version": "0.5.0",
+  "name": "@trofo/story-engine",
+  "version": "0.5.1",
   "description": "An engine to support user decision driven stories using Alexa skills",
   "main": "index.js",
   "scripts": {
@@ -19,5 +19,17 @@
   "bugs": {
     "url": "https://github.com/trofo-systems/story-engine/issues"
   },
-  "homepage": "https://github.com/trofo-systems/story-engine#readme"
+  "homepage": "https://github.com/trofo-systems/story-engine#readme",
+  "dependencies": {
+    "alexa-app": "^4.2.2",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "async": "^2.6.1",
+    "chai": "^3.4.1",
+    "express": "^4.14.0",
+    "mocha": "^2.3.4",
+    "proxyquire": "^2.0.1",
+    "supertest": "^2.0.1"
+  }
 }

@@ -1,6 +1,6 @@
 {
-  "name": "@trofo/story-engine",
-  "version": "0.5.1",
+  "name": "story-engine",
+  "version": "0.5.2",
   "description": "An engine to support user decision driven stories using Alexa skills",
   "main": "index.js",
   "scripts": {

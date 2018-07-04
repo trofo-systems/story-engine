@@ -4,7 +4,7 @@
   "description": "An engine to support user decision driven stories using Alexa skills",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test"
+    "test": "nyc --reporter=lcov mocha"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
     "async": "^2.6.1",
     "chai": "^3.4.1",
     "mocha": "^5.2.0",
+    "nyc": "^12.0.2",
     "proxyquire": "^2.0.1",
     "supertest": "^3.1.0"
   }

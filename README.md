@@ -51,18 +51,18 @@ Every state has to have a `name` and a `text`. And optionally it can also have:
 story-engine uses [alexa-app](https://github.com/alexa-js/alexa-app) under the hood, and it will return an instance of `app` when the stories are loaded.
 If you are exposing your backend using lambdas, you could do someething like this
 
-```json
-exports.handler = require('story-engine')([{states:[...]}]).lambda();
+```javascript
+exports.handler = require('story-engine')([{"states":[]}]).lambda();
 ```
 
 Of course stories will be quite big objects, so it might be a good idea putting them into separate files and then just using require to pass them to story-engine
 
-```json
+```javascript
 exports.handler = require('story-engine')([require('./storyA'),require('./storyB')]).lambda();
 ```
 And just to make it very readable:
 
-```json
+```javascript
 const storyEngine = require('story-engine');
 const stories = [
                     require('./storyA'),

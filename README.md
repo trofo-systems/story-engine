@@ -9,7 +9,9 @@ This code was initially part of a personal Alexa Skill. I believe there's a good
 
 # Example
 
-Simply build a story as if it was a series of states and its possible transitions.
+You can find an example alexa skill running on story-engine on [story-engine-skill-example](https://github.com/trofo-systems/story-engine-skill-example). This project is under ask-cli format already, making it easy to be deployed and tested on real echo devices.
+
+Basically you can build a story as if it was a series of states and its possible transitions.
 
 ```json
 {

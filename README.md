@@ -77,13 +77,17 @@ exports.handler = storyEngine(stories).lambda();
 
 Following Amzon's guidelines (missing reference), some intents will be implemented by default.
 
-## AMAZON.StopIntent
+## AMAZON.StopIntent and AMAZON.CancelIntent
+
+Simply stop the skill immediately with a short goodbye message.
 
 ## AMAZON.HelpIntent
 
+Required by Amazon. The name is self-explanatory; it provides a short explanation of the app dynamic and start a new story right away.
+
 ## AMAZON.RepeatIntent
 
-## AMAZON.CancelIntent
+This is also required by Amazon and it has to repeat the previous response entirely. I tried to just play only the values defined on the `prompt` property and that got rejected as part of the certification process.
 
 # Serving several stories
 

@@ -3,7 +3,6 @@ const Story = require('./stories');
 
 module.exports = function (storyScripts) {
 
-
     const app = new alexa.app('story-box');
     let availableStories = [];
 
@@ -96,6 +95,14 @@ module.exports = function (storyScripts) {
     });
 
     app.stories = availableStories;
+
+    app.testStories = function () {
+        availableStories.forEach(story => require('./validate-story')(story));
+    };
+
+    app.testModel = function (model) {
+        availableStories.forEach(story => require('./validate-model')(story, model));
+    };
 
     return app;
 

@@ -60,11 +60,6 @@ exports.handler = require('story-engine')([{"states":[]}]).lambda();
 Of course stories will be quite big objects, so it might be a good idea putting them into separate files and then just using require to pass them to story-engine
 
 ```javascript
-exports.handler = require('story-engine')([require('./storyA'),require('./storyB')]).lambda();
-```
-And just to make it very readable:
-
-```javascript
 const storyEngine = require('story-engine');
 const stories = [
                     require('./storyA'),

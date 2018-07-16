@@ -93,3 +93,34 @@ This is also required by Amazon and it has to repeat the previous response entir
 
 # Testing your story
 
+`story-engine` also helps to ensure your story is consistent and enjoyable. As long as you have `mocha` and `chai` in your test dependencies scope, you can pull in some automatic tests. If you don't, just run the following:
+
+```bash
+npm i mocha --save-dev
+npm i chai --save-dev
+```
+
+And then simply create a file in your test folder with something like this:
+
+```javascript
+let app = require('story-engine')([require('../walk-on-the-beach-story')]);
+app.testStories();
+app.testModel(require("../../../models/en-US"));
+```
+
+This will automatically check your story and your model against the following items:
+
+```
+  story structure
+    ✓ has no dead ends
+    ✓ has no unreachable states
+    ✓ has no duplicate states
+    ✓ has one and only one start
+    ✓ has no super long repeats in non-final states
+
+  Models
+    ✓ should not have undeclared intents
+    ✓ Model should not have duplicate utterance samples
+```
+
+The idea is that the test names should be meaningful enough to highlight what's wrong. If not, let's make them better together.

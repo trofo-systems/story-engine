@@ -1,6 +1,6 @@
 {
   "name": "story-engine",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "An engine to support user decision driven stories using Alexa skills",
   "main": "index.js",
   "scripts": {

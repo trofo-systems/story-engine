@@ -51,13 +51,25 @@ Every state has to have a `name` and a `text`. And optionally it can also have:
 # Publishing the story
 
 story-engine uses [alexa-app](https://github.com/alexa-js/alexa-app) under the hood, and it will return an instance of `app` when the stories are loaded.
-If you are exposing your backend using lambdas, you could do someething like this
+If you are exposing your backend using lambdas, you could do something like this
 
 ```javascript
 exports.handler = require('story-engine')([{"states":[]}]).lambda();
 ```
 
 Of course stories will be quite big objects, so it might be a good idea putting them into separate files and then just using require to pass them to story-engine
+
+```javascript
+const storyEngine = require('story-engine');
+const stories = [
+                    require('./my-story')
+                ];
+exports.handler = storyEngine(stories).lambda();
+```
+
+# Serving several stories
+
+`story-engine` has support for multiple stories. In the current implementation you can load as many different stories as you like and the engine will randomly pick one whenever a session starts and stick to it until the session terminates.
 
 ```javascript
 const storyEngine = require('story-engine');
@@ -83,8 +95,6 @@ Required by Amazon. The name is self-explanatory; it provides a short explanatio
 ## AMAZON.RepeatIntent
 
 This is also required by Amazon and it has to repeat the previous response entirely. I tried to just play only the values defined on the `prompt` property and that got rejected as part of the certification process.
-
-# Serving several stories
 
 # Testing your story
 

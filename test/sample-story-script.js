@@ -1,4 +1,5 @@
 module.exports = {
+    "title": "Sample story",
     "states": [
         {
             "name": "home",

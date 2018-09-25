@@ -24,7 +24,7 @@ module.exports = function (story, model) {
         });
 
         // TODO this does not need to run for every story
-        it('Model should not have duplicate utterance samples', function (done) {
+        it('model should not have duplicate utterance samples', function (done) {
                 const samples = new Set();
                 var obj = model;
                 var error = false;

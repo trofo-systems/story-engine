@@ -5,7 +5,7 @@ const differ = (set1, set2) => [...set1].filter(num => !set2.has(num));
 
 module.exports = function (storyInTest) {
 
-    describe('story structure', function () {
+    describe('Checking structure of story '+storyInTest.getTitle(), function () {
 
         var storyStates = storyInTest.getAllStates();
 

@@ -15,6 +15,7 @@ Basically you can build a story as if it was a series of states and its possible
 
 ```json
 {
+    "title": "Lost in a room",
     "states": [
         {
             "name": "home",
@@ -125,7 +126,7 @@ This will automatically check your story and your model against the following it
 
   Models
     ✓ should not have undeclared intents
-    ✓ Model should not have duplicate utterance samples
+    ✓ model should not have duplicate utterance samples
 ```
 
 The idea is that the test names should be meaningful enough to highlight what's wrong. If not, let's make them better together.

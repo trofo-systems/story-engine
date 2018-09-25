@@ -1,6 +1,10 @@
 function Story(storyScript) {
     this.intents = new Map();
 
+    this.getTitle = function () {
+        return storyScript.title || "untitled";
+    };
+
     this.getAllStates = function () {
         return storyScript.states;
     };

@@ -22,7 +22,8 @@
   "homepage": "https://github.com/trofo-systems/story-engine#readme",
   "dependencies": {
     "alexa-app": "^4.2.2",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "nearley": "^2.15.1"
   },
   "devDependencies": {
     "async": "^2.6.1",

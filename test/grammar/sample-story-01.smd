@@ -1,0 +1,34 @@
+Title: Sample story
+
+# home
+
+Hello.
+> Would you like to go to the river or to the beach?
+
+:GoToBeachIntent -> beach
+:GoToRiverIntent -> river
+:Wait -> wait
+:GoBySeaWalkIntent -> seawalk
+
+# river
+
+You are now in the river. But there is nothing to do here.
+> What about going to the beach?
+
+:GoToBeachIntent  -> beach
+
+# seawalk
+
+You do the seawalk.
+
+# beach
+
+You are now in the beach!. Congratulations!
+
+##
+
+# wait
+
+You waited a bit. But now you can only go to somewhere.
+
+-->beach

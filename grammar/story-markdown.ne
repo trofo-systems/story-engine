@@ -2,7 +2,7 @@
 var itemAt = function (a) { return function (d) {return d[a]; } };
 var buildMap = function(a,b) {return function(d){ actions = {}; actions[d[a]] = d[b]; return actions; }};
 var emptyStr = function (d) { return ""; };
-var buildState = function(name, text, prompt){state = {name: name[0], text:text};return state;};
+var buildState = function(name, text, prompt, final){state = {name: name[0], text:text};if(final === true) {state.final = true;} return state;};
 var mergeMap = function(map, element){ return function(d){ for (var property in d[element]) {
                                                                if (d[element].hasOwnProperty(property)) {
                                                                    d[map][property] = d[element][property];
@@ -23,7 +23,7 @@ state -> non_actionable_state {% itemAt(0) %}
 
 actionable_state -> non_actionable_state prompt:* newline actions newline default_action:? {% function(d){d[0].actions = d[3];return d[0];} %}
 
-non_actionable_state -> state_name:* non_empty_string newline:* "##":* {% function(d){return buildState(d[0], d[1])} %}
+non_actionable_state -> state_name:* non_empty_string newline:* "##":* {% function(d){return buildState(d[0], d[1],null,d[3].length > 0)} %}
 
 prompt ->  ">" [\s]:*  non_empty_string {% itemAt(2) %}
 

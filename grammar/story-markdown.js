@@ -6,7 +6,7 @@ function id(x) { return x[0]; }
 var itemAt = function (a) { return function (d) {return d[a]; } };
 var buildMap = function(a,b) {return function(d){ actions = {}; actions[d[a]] = d[b]; return actions; }};
 var emptyStr = function (d) { return ""; };
-var buildState = function(name, text, prompt){state = {name: name[0], text:text};return state;};
+var buildState = function(name, text, prompt, final){state = {name: name[0], text:text};if(final === true) {state.final = true;} return state;};
 var mergeMap = function(map, element){ return function(d){ for (var property in d[element]) {
                                                                if (d[element].hasOwnProperty(property)) {
                                                                    d[map][property] = d[element][property];
@@ -35,7 +35,7 @@ var grammar = {
     {"name": "non_actionable_state$ebnf$3", "symbols": []},
     {"name": "non_actionable_state$ebnf$3$string$1", "symbols": [{"literal":"#"}, {"literal":"#"}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "non_actionable_state$ebnf$3", "symbols": ["non_actionable_state$ebnf$3", "non_actionable_state$ebnf$3$string$1"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "non_actionable_state", "symbols": ["non_actionable_state$ebnf$1", "non_empty_string", "non_actionable_state$ebnf$2", "non_actionable_state$ebnf$3"], "postprocess": function(d){return buildState(d[0], d[1])}},
+    {"name": "non_actionable_state", "symbols": ["non_actionable_state$ebnf$1", "non_empty_string", "non_actionable_state$ebnf$2", "non_actionable_state$ebnf$3"], "postprocess": function(d){return buildState(d[0], d[1],null,d[3].length > 0)}},
     {"name": "prompt$ebnf$1", "symbols": []},
     {"name": "prompt$ebnf$1", "symbols": ["prompt$ebnf$1", /[\s]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "prompt", "symbols": [{"literal":">"}, "prompt$ebnf$1", "non_empty_string"], "postprocess": itemAt(2)},

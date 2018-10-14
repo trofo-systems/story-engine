@@ -13,10 +13,10 @@ describe('Grammar', function () {
         fs.readdirSync(grammarFolder).filter(file => file.endsWith(".smd"))
             .forEach(file => {
                 console.log("parsing " + file);
-                parser.feed(fs.readFileSync(grammarFolder + file, 'utf8'));
+                var results = parser.feed(fs.readFileSync(grammarFolder + file, 'utf8')).results;
+                expect(new Set(results.map(it => JSON.stringify(it))).size).to.eql(1);
 
-                //TODO compare to .js
-
+                expect(results[0]).to.eql(require('../test/grammar/sample-story-01.json'));
             });
 
         done();

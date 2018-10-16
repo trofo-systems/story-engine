@@ -11,17 +11,24 @@ var mergeMap = function(map, element){ return function(d){ for (var property in 
                                                            return d[map];}};
 %}
 
-story -> title newline states {% function(d){return {title: d[0], states: d[2]}}%}
+story -> title newline state newline:* states {% function(d){d[2].start = true;
+var states;
+if(d[4]){
+states = d[4].concat([d[2]])
+}else{
+states = [d[2]];
+}
+
+return {title: d[0], states: states}}%}
 
 title -> "Title: " non_empty_string {% itemAt(1) %}
 
-states -> state {% function(d){return [d]} %}
-          | state newline states {% function(d){  return d[2].concat(d[0]); } %}
+states -> null | states newline state  {% function(d){  return d[0].concat(d[2]); } %}
 
 state -> non_actionable_state {% itemAt(0) %}
           | actionable_state {% itemAt(0) %}
 
-actionable_state -> non_actionable_state prompt:* newline actions newline default_action:? {% function(d){d[0].actions = d[3];return d[0];} %}
+actionable_state -> non_actionable_state prompt:* newline actions newline default_action:? {% function(d){d[0].actions = d[3];if(d[1].length > 0)d[0].prompt = d[1][0];return d[0];} %}
 
 non_actionable_state -> state_name:* non_empty_string newline:* "##":* {% function(d){return buildState(d[0], d[1],null,d[3].length > 0)} %}
 

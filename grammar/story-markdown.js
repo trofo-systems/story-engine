@@ -16,18 +16,28 @@ var mergeMap = function(map, element){ return function(d){ for (var property in 
 var grammar = {
     Lexer: undefined,
     ParserRules: [
-    {"name": "story", "symbols": ["title", "newline", "states"], "postprocess": function(d){return {title: d[0], states: d[2]}}},
+    {"name": "story$ebnf$1", "symbols": []},
+    {"name": "story$ebnf$1", "symbols": ["story$ebnf$1", "newline"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "story", "symbols": ["title", "newline", "state", "story$ebnf$1", "states"], "postprocess":  function(d){d[2].start = true;
+        var states;
+        if(d[4]){
+        states = d[4].concat([d[2]])
+        }else{
+        states = [d[2]];
+        }
+        
+        return {title: d[0], states: states}}},
     {"name": "title$string$1", "symbols": [{"literal":"T"}, {"literal":"i"}, {"literal":"t"}, {"literal":"l"}, {"literal":"e"}, {"literal":":"}, {"literal":" "}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "title", "symbols": ["title$string$1", "non_empty_string"], "postprocess": itemAt(1)},
-    {"name": "states", "symbols": ["state"], "postprocess": function(d){return [d]}},
-    {"name": "states", "symbols": ["state", "newline", "states"], "postprocess": function(d){  return d[2].concat(d[0]); }},
+    {"name": "states", "symbols": []},
+    {"name": "states", "symbols": ["states", "newline", "state"], "postprocess": function(d){  return d[0].concat(d[2]); }},
     {"name": "state", "symbols": ["non_actionable_state"], "postprocess": itemAt(0)},
     {"name": "state", "symbols": ["actionable_state"], "postprocess": itemAt(0)},
     {"name": "actionable_state$ebnf$1", "symbols": []},
     {"name": "actionable_state$ebnf$1", "symbols": ["actionable_state$ebnf$1", "prompt"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "actionable_state$ebnf$2", "symbols": ["default_action"], "postprocess": id},
     {"name": "actionable_state$ebnf$2", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "actionable_state", "symbols": ["non_actionable_state", "actionable_state$ebnf$1", "newline", "actions", "newline", "actionable_state$ebnf$2"], "postprocess": function(d){d[0].actions = d[3];return d[0];}},
+    {"name": "actionable_state", "symbols": ["non_actionable_state", "actionable_state$ebnf$1", "newline", "actions", "newline", "actionable_state$ebnf$2"], "postprocess": function(d){d[0].actions = d[3];if(d[1].length > 0)d[0].prompt = d[1][0];return d[0];}},
     {"name": "non_actionable_state$ebnf$1", "symbols": []},
     {"name": "non_actionable_state$ebnf$1", "symbols": ["non_actionable_state$ebnf$1", "state_name"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "non_actionable_state$ebnf$2", "symbols": []},

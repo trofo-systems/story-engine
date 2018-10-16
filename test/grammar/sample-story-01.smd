@@ -15,7 +15,7 @@ Hello.
 You are now in the river. But there is nothing to do here.
 > What about going to the beach?
 
-:GoToBeachIntent  -> beach
+:GoToBeachIntent -> beach
 
 # seawalk
 

@@ -9,6 +9,11 @@ var mergeMap = function(map, element){ return function(d){ for (var property in 
                                                                }
                                                            }
                                                            return d[map];}};
+
+const actionableState = function(d){d[0].actions = d[3];
+    if(d[1].length > 0)d[0].prompt = d[1][0];
+    if(d[5]) d[0].defaultAction = d[5];
+    return d[0];};
 %}
 
 story -> title newline state newline:* states {% function(d){d[2].start = true;
@@ -28,7 +33,7 @@ states -> null | states newline state  {% function(d){  return d[0].concat(d[2])
 state -> non_actionable_state {% itemAt(0) %}
           | actionable_state {% itemAt(0) %}
 
-actionable_state -> non_actionable_state prompt:* newline actions newline default_action:? {% function(d){d[0].actions = d[3];if(d[1].length > 0)d[0].prompt = d[1][0];return d[0];} %}
+actionable_state -> non_actionable_state prompt:* newline actions newline default_action:? {% actionableState %}
 
 non_actionable_state -> state_name:* non_empty_string newline:* "##":* {% function(d){return buildState(d[0], d[1],null,d[3].length > 0)} %}
 
@@ -43,6 +48,6 @@ actions -> action {% itemAt(0) %}
 
 action ->  ":" non_empty_string  " -> " non_empty_string {% buildMap(1,3) %}
 
-default_action -> "-->" non_empty_string
+default_action -> "-->" non_empty_string {% itemAt(1) %}
 
 non_empty_string ->  [A-Za-z] [^\n\r]:* {% function(d){return d[0]+ d[1].join("") } %}

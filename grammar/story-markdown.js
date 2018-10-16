@@ -13,6 +13,11 @@ var mergeMap = function(map, element){ return function(d){ for (var property in 
                                                                }
                                                            }
                                                            return d[map];}};
+
+const actionableState = function(d){d[0].actions = d[3];
+    if(d[1].length > 0)d[0].prompt = d[1][0];
+    if(d[5]) d[0].defaultAction = d[5];
+    return d[0];};
 var grammar = {
     Lexer: undefined,
     ParserRules: [
@@ -37,7 +42,7 @@ var grammar = {
     {"name": "actionable_state$ebnf$1", "symbols": ["actionable_state$ebnf$1", "prompt"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "actionable_state$ebnf$2", "symbols": ["default_action"], "postprocess": id},
     {"name": "actionable_state$ebnf$2", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "actionable_state", "symbols": ["non_actionable_state", "actionable_state$ebnf$1", "newline", "actions", "newline", "actionable_state$ebnf$2"], "postprocess": function(d){d[0].actions = d[3];if(d[1].length > 0)d[0].prompt = d[1][0];return d[0];}},
+    {"name": "actionable_state", "symbols": ["non_actionable_state", "actionable_state$ebnf$1", "newline", "actions", "newline", "actionable_state$ebnf$2"], "postprocess": actionableState},
     {"name": "non_actionable_state$ebnf$1", "symbols": []},
     {"name": "non_actionable_state$ebnf$1", "symbols": ["non_actionable_state$ebnf$1", "state_name"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "non_actionable_state$ebnf$2", "symbols": []},
@@ -59,7 +64,7 @@ var grammar = {
     {"name": "action$string$1", "symbols": [{"literal":" "}, {"literal":"-"}, {"literal":">"}, {"literal":" "}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "action", "symbols": [{"literal":":"}, "non_empty_string", "action$string$1", "non_empty_string"], "postprocess": buildMap(1,3)},
     {"name": "default_action$string$1", "symbols": [{"literal":"-"}, {"literal":"-"}, {"literal":">"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "default_action", "symbols": ["default_action$string$1", "non_empty_string"]},
+    {"name": "default_action", "symbols": ["default_action$string$1", "non_empty_string"], "postprocess": itemAt(1)},
     {"name": "non_empty_string$ebnf$1", "symbols": []},
     {"name": "non_empty_string$ebnf$1", "symbols": ["non_empty_string$ebnf$1", /[^\n\r]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "non_empty_string", "symbols": [/[A-Za-z]/, "non_empty_string$ebnf$1"], "postprocess": function(d){return d[0]+ d[1].join("") }}

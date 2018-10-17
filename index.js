@@ -1,5 +1,6 @@
 const alexa = require('alexa-app');
 const Story = require('./stories');
+const plainStory = require('./grammar');
 
 module.exports = function (storyScripts) {
 
@@ -85,7 +86,11 @@ module.exports = function (storyScripts) {
     };
 
     storyScripts.forEach(it => {
-        availableStories.push(new Story(it));
+        if (typeof it === 'string') {
+            availableStories.push(new Story(plainStory(it)));
+        } else {
+            availableStories.push(new Story(it));
+        }
     });
 
     availableStories.forEach(it => {

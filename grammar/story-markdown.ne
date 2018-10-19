@@ -1,6 +1,6 @@
 @{%
 var itemAt = function (a) { return function (d) {return d[a]; } };
-var buildMap = function(a,b) {return function(d){ actions = {}; actions[d[a]] = d[b]; return actions; }};
+var buildMap = function(a,b) {return function(d){ actions = {}; actions[d[b]] = [d[a]]; return actions; }};
 var emptyStr = function (d) { return ""; };
 var buildState = function(name, text, prompt, final, nextAction){
 state = {name: name[0], text:text};
@@ -10,14 +10,25 @@ if(nextAction) {state.nextAction = nextAction}
  return state;
 };
 
-var mergeMap = function(map, element){ return function(d){ for (var property in d[element]) {
-                                                               if (d[element].hasOwnProperty(property)) {
-                                                                   d[map][property] = d[element][property];
-                                                               }
-                                                           }
-                                                           return d[map];}};
+var mergeMap = function(map, element){ return function(d){
+  var actions = {};
+     for (var property in d[map]) {
+         if (d[map].hasOwnProperty(property)) {
+           actions[property] = d[map][property];
+         }
+     }
+ for (var property in d[element]) {
+   if (d[element].hasOwnProperty(property)) {
+       var response = actions[property];
+       if(!response){
+          response = [];
+        }
+       actions[property] = response.concat(d[element][property]);
+   }
+}
+return actions;}};
 
-const actionableState = function(d){d[0].actions = d[3];
+const actionableState = function(d){d[0].plainActions = d[3];
     if(d[1].length > 0)d[0].prompt = d[1][0];
     if(d[5]) d[0].defaultAction = d[5];
     return d[0];};

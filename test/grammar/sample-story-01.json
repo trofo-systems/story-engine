@@ -1,43 +1,56 @@
 {
-  "title": "Sample story",
   "states": [
     {
       "name": "river",
-      "text": "You are now in the river. But there is nothing to do here.",
+      "plainActions": {
+        "beach": [
+          "Let's go to the beach"
+        ]
+      },
       "prompt": "What about going to the beach?",
-      "actions": {
-        "GoToBeachIntent": "beach"
-      }
+      "text": "You are now in the river. But there is nothing to do here."
     },
     {
       "name": "seawalk",
-      "text": "You do the seawalk.",
-      "nextAction": "beach"
+      "nextAction": "beach",
+      "text": "You do the seawalk."
     },
     {
+      "final": true,
       "name": "beach",
-      "text": "You are now in the beach!. Congratulations!",
-      "final": true
+      "text": "You are now in the beach!. Congratulations!"
     },
     {
-      "actions": {
-        "keepWaiting": "wait"
-      },
+      "defaultAction": "beach",
       "name": "wait",
-      "text": "You waited a bit. But now you can only go to somewhere.",
-      "defaultAction": "beach"
+      "plainActions": {
+        "wait": [
+          "I'll wait more"
+        ]
+      },
+      "text": "You waited a bit. But now you can only go to somewhere."
     },
     {
       "name": "home",
-      "text": "Hello.",
-      "prompt": "Would you like to go to the river or to the beach?",
-      "actions": {
-        "GoToBeachIntent": "beach",
-        "GoToRiverIntent": "river",
-        "Wait": "wait",
-        "GoBySeaWalkIntent": "seawalk"
+      "plainActions": {
+        "beach": [
+          "I want to go to the beach",
+          "To the beach"
+        ],
+        "river": [
+          "I wanna go to the river"
+        ],
+        "seawalk": [
+          "Let's do a sea walk"
+        ],
+        "wait": [
+          "I want to wait"
+        ]
       },
-      "start": true
+      "prompt": "Would you like to go to the river or to the beach?",
+      "start": true,
+      "text": "Hello."
     }
-  ]
+  ],
+  "title": "Sample story"
 }

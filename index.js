@@ -1,6 +1,7 @@
 const alexa = require('alexa-app');
 const Story = require('./stories');
 const plainStory = require('./grammar');
+const crypto = require('crypto');
 
 module.exports = function (storyScripts) {
 
@@ -85,9 +86,39 @@ module.exports = function (storyScripts) {
         res.say("Try again!");
     };
 
+    function md5(value) {
+        return crypto.createHash('md5').update(value).digest("hex").replace(/[0-9]/g, '');
+    }
+
+    function mapIntents(story) {
+        let mappings = [];
+
+        story.states.forEach(state => {
+            let actions = {};
+
+            for (let property in state.plainActions) {
+                if (state.plainActions.hasOwnProperty(property)) {
+                    var samples = state.plainActions[property];
+                    var intentKey = "SE_"+md5(JSON.stringify(samples));
+                    actions[intentKey] = property;
+
+                    mappings.push({name: intentKey, samples: samples})
+
+                }
+            }
+            state.actions = actions;
+        });
+        //TODO this info is valuable but not exposed enough
+        console.log("Ensure you have this in your model: " + JSON.stringify(mappings));
+    }
+
     storyScripts.forEach(it => {
         if (typeof it === 'string') {
-            availableStories.push(new Story(plainStory(it)));
+            let plain = plainStory(it);
+
+            mapIntents(plain);
+
+            availableStories.push(new Story(plain));
         } else {
             availableStories.push(new Story(it));
         }

@@ -11,7 +11,35 @@ This code was initially part of a personal Alexa Skill. I believe there's a good
 
 You can find an example alexa skill running on story-engine on [story-engine-skill-example](https://github.com/trofo-systems/story-engine-skill-example). This project is under ask-cli format already, making it easy to be deployed and tested on real echo devices.
 
-Basically you can build a story as if it was a series of states and its possible transitions.
+```
+Title: Lost in a romm
+
+# home
+
+You woke up in an empty room. There's only a locked door and an open window ahead of you. Would you like to knock the door or jump out of the window?
+
+:Knock -> door
+:Check the door -> door
+:Jump out -> window
+:Escape through the window -> window
+
+# door
+
+You knock on the door several times, but you can hear nothing but silence. You move then to the window.
+
+--> window
+
+# window
+
+You get close to the window and you can feel a cold gust. It is very dark but today you are feeling specially brave. For some reason, you think it is a good idea to jump through the window <audio src='https://s3.amazonaws.com/ask-soundlibrary/magic/amzn_sfx_magic_blast_1x_01.mp3'/> and then you find yourself back in your bed. It was just a dream.
+
+##
+```
+
+This text above is following story-engines's own custom grammar. [It looks like this](docs/rail-road.html)
+
+
+You can also build a story as if it was a series of states and its possible transitions.
 
 ```json
 {
@@ -27,7 +55,7 @@ Basically you can build a story as if it was a series of states and its possible
             "start": true
         }, {
             "name": "door",
-            "text": "You knock on the door several times, but you can hear nothing but silece. You move then to the window.",
+            "text": "You knock on the door several times, but you can hear nothing but silence. You move then to the window.",
             "nextAction": "window"
         }, {
             "name": "window",

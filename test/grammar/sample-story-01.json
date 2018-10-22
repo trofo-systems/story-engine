@@ -1,0 +1,56 @@
+{
+  "states": [
+    {
+      "name": "river",
+      "plainActions": {
+        "beach": [
+          "Let's go to the beach"
+        ]
+      },
+      "prompt": "What about going to the beach?",
+      "text": "You are now in the river. But there is nothing to do here."
+    },
+    {
+      "name": "seawalk",
+      "nextAction": "beach",
+      "text": "You do the seawalk."
+    },
+    {
+      "final": true,
+      "name": "beach",
+      "text": "You are now in the beach!. Congratulations!"
+    },
+    {
+      "defaultAction": "beach",
+      "name": "wait",
+      "plainActions": {
+        "wait": [
+          "I'll wait more"
+        ]
+      },
+      "text": "You waited a bit. But now you can only go to somewhere."
+    },
+    {
+      "name": "home",
+      "plainActions": {
+        "beach": [
+          "I want to go to the beach",
+          "To the beach"
+        ],
+        "river": [
+          "I wanna go to the river"
+        ],
+        "seawalk": [
+          "Let's do a sea walk"
+        ],
+        "wait": [
+          "I want to wait"
+        ]
+      },
+      "prompt": "Would you like to go to the river or to the beach?",
+      "start": true,
+      "text": "Hello."
+    }
+  ],
+  "title": "Sample story"
+}

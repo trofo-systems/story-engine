@@ -36,7 +36,7 @@ You get close to the window and you can feel a cold gust. It is very dark but to
 ##
 ```
 
-This text above is following story-engines's own custom grammar. [It looks like this](docs/rail-road.html)
+This text above is following story-engines's own custom grammar. [Click here to see the grammar rail road diagram](docs/grammar-rail-road.png)
 
 
 You can also build a story as if it was a series of states and its possible transitions.

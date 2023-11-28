@@ -23,7 +23,7 @@
   "dependencies": {
     "alexa-app": "^4.2.2",
     "express": "^4.16.3",
-    "nearley": "^2.15.1"
+    "nearley": "^2.16.0"
   },
   "devDependencies": {
     "async": "^2.6.1",
